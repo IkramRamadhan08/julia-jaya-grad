@@ -168,21 +168,66 @@
   }
   @media(min-width:768px){.hero-desc{font-size:1.125rem}}
   @media(max-width:379px){.hero-title{font-size:1.75rem}}
-  .hero-bar{position:absolute;left:0;bottom:0;width:100%;height:4px;background:var(--orange)}
+  .hero-bar{
+    position:absolute;left:0;bottom:0;width:100%;height:2px;
+    background:linear-gradient(90deg,
+      transparent 0%,
+      rgba(244,119,40,.08) 12%,
+      rgba(244,119,40,.55) 34%,
+      #f47728 50%,
+      rgba(244,119,40,.55) 66%,
+      rgba(244,119,40,.08) 88%,
+      transparent 100%);
+    box-shadow:0 -1px 20px rgba(244,119,40,.22);
+    opacity:.9;
+  }
 
   /* ============================================================
      TRUST STRIP
      ============================================================ */
-  .trust{background:#252a2d;color:#fff}
-  .trust-grid{
-    display:grid;grid-template-columns:1fr;gap:1px;
-    max-width:80rem;margin:0 auto;background:rgba(255,255,255,.10);
+  .trust{position:relative;background:#252a2d;color:#fff;overflow:hidden}
+  .trust::before,.trust::after{
+    content:"";position:absolute;top:0;bottom:0;z-index:2;pointer-events:none;
+    width:clamp(28px,5vw,72px);
   }
-  @media(min-width:640px){.trust-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-  @media(min-width:1024px){.trust-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
-  .trust-item{display:flex;align-items:center;gap:16px;background:#252a2d;padding:26px 24px}
+  .trust::before{left:0;background:linear-gradient(90deg,#252a2d 15%,rgba(37,42,45,0))}
+  .trust::after{right:0;background:linear-gradient(270deg,#252a2d 15%,rgba(37,42,45,0))}
+  .trust-track{
+    display:flex;width:max-content;
+    animation:trust-scroll 38s linear infinite;
+    will-change:transform;
+  }
+  .trust-track:hover{animation-play-state:paused}
+  @keyframes trust-scroll{
+    from{transform:translate3d(0,0,0)}
+    to{transform:translate3d(-50%,0,0)}
+  }
+  .trust-group{display:flex;align-items:stretch}
+  .trust-item{
+    position:relative;display:flex;align-items:center;gap:16px;flex:0 0 auto;
+    background:#252a2d;padding:26px 38px;white-space:nowrap;
+  }
+  .trust-item::after{
+    content:"";position:absolute;right:0;top:50%;
+    width:1px;height:26px;transform:translateY(-50%);
+    background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.18),rgba(255,255,255,0));
+  }
   .trust-item svg{width:24px;height:24px;flex:0 0 auto;color:var(--orange)}
   .trust-item p{font-weight:700;font-size:1rem;line-height:1.35}
+  @media(max-width:639px){
+    .trust-item{padding:20px 26px}
+    .trust-item p{font-size:.9375rem}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .trust::before,.trust::after{display:none}
+    .trust-track{animation:none;width:100%;flex-wrap:wrap}
+    .trust-group{width:100%;flex-wrap:wrap}
+    .trust-group + .trust-group{display:none}
+    .trust-item{flex:1 1 50%;white-space:normal}
+  }
+  @media (prefers-reduced-motion: reduce) and (min-width:1024px){
+    .trust-item{flex:1 1 25%}
+  }
 
   /* ============================================================
      GALERI & DOKUMENTASI
@@ -916,39 +961,140 @@
      TRUST STRIP
      ============================================================ -->
 <section class="trust" aria-label="Keunggulan layanan">
-  <div class="trust-grid">
-    <div class="trust-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"></path>
-        <path d="m15 9-6 6"></path><path d="M9 9h.01"></path><path d="M15 15h.01"></path>
-      </svg>
-      <p>Harga kompetitif</p>
+  <div class="trust-track">
+    <div class="trust-group">
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"></path>
+          <path d="m15 9-6 6"></path><path d="M9 9h.01"></path><path d="M15 15h.01"></path>
+        </svg>
+        <p>Harga kompetitif</p>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3v18"></path>
+          <path d="m19 8 3 8a5 5 0 0 1-6 0zV7"></path>
+          <path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1"></path>
+          <path d="m5 8 3 8a5 5 0 0 1-6 0zV7"></path>
+          <path d="M7 21h10"></path>
+        </svg>
+        <p>Penimbangan transparan</p>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
+        </svg>
+        <p>Layanan cepat</p>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
+          <path d="M15 18H9"></path>
+          <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
+          <circle cx="17" cy="18" r="2"></circle>
+          <circle cx="7" cy="18" r="2"></circle>
+        </svg>
+        <p>Penjemputan terjadwal</p>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"></path>
+          <circle cx="7.5" cy="7.5" r=".5" fill="currentColor"></circle>
+        </svg>
+        <p>Tanpa biaya penawaran</p>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path>
+          <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path>
+        </svg>
+        <p>Pembayaran setelah timbang</p>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+          <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+          <path d="M10 9H8"></path>
+          <path d="M16 13H8"></path>
+          <path d="M16 17H8"></path>
+        </svg>
+        <p>Berita acara &amp; surat jalan</p>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path>
+          <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"></path>
+          <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path>
+        </svg>
+        <p>Siap volume besar</p>
+      </div>
     </div>
-    <div class="trust-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M12 3v18"></path>
-        <path d="m19 8 3 8a5 5 0 0 1-6 0zV7"></path>
-        <path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1"></path>
-        <path d="m5 8 3 8a5 5 0 0 1-6 0zV7"></path>
-        <path d="M7 21h10"></path>
-      </svg>
-      <p>Penimbangan transparan</p>
-    </div>
-    <div class="trust-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
-      </svg>
-      <p>Layanan cepat</p>
-    </div>
-    <div class="trust-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
-        <path d="M15 18H9"></path>
-        <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
-        <circle cx="17" cy="18" r="2"></circle>
-        <circle cx="7" cy="18" r="2"></circle>
-      </svg>
-      <p>Penjemputan terjadwal</p>
+    <div class="trust-group" aria-hidden="true">
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"></path>
+          <path d="m15 9-6 6"></path><path d="M9 9h.01"></path><path d="M15 15h.01"></path>
+        </svg>
+        <p>Harga kompetitif</p>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3v18"></path>
+          <path d="m19 8 3 8a5 5 0 0 1-6 0zV7"></path>
+          <path d="M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1"></path>
+          <path d="m5 8 3 8a5 5 0 0 1-6 0zV7"></path>
+          <path d="M7 21h10"></path>
+        </svg>
+        <p>Penimbangan transparan</p>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
+        </svg>
+        <p>Layanan cepat</p>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
+          <path d="M15 18H9"></path>
+          <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
+          <circle cx="17" cy="18" r="2"></circle>
+          <circle cx="7" cy="18" r="2"></circle>
+        </svg>
+        <p>Penjemputan terjadwal</p>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"></path>
+          <circle cx="7.5" cy="7.5" r=".5" fill="currentColor"></circle>
+        </svg>
+        <p>Tanpa biaya penawaran</p>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path>
+          <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path>
+        </svg>
+        <p>Pembayaran setelah timbang</p>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+          <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+          <path d="M10 9H8"></path>
+          <path d="M16 13H8"></path>
+          <path d="M16 17H8"></path>
+        </svg>
+        <p>Berita acara &amp; surat jalan</p>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path>
+          <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"></path>
+          <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path>
+        </svg>
+        <p>Siap volume besar</p>
+      </div>
     </div>
   </div>
 </section>
