@@ -207,6 +207,22 @@
     background:var(--orange);transform:translateY(.02em);
   }
 
+  /* penjelasan singkat di bawah heading section */
+  .sec-sub{
+    margin:14px 0 0;max-width:46rem;
+    color:var(--body);font-size:1rem;line-height:1.7;
+  }
+  @media(min-width:768px){
+    .sec-sub{font-size:1.0625rem;max-width:52rem}
+  }
+  .sec-head-txt{min-width:0}
+  .sec-sub + .mat-grid{margin-top:26px}
+  .sec-sub + .cara-list{margin-top:28px}
+  @media(min-width:900px){
+    .sec-sub + .mat-grid{margin-top:34px}
+    .sec-sub + .cara-list{margin-top:36px}
+  }
+
   .gal-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
   .gal-hint{
     display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 16px;
@@ -944,7 +960,10 @@
   <div class="wrap">
 
     <div class="gal-head">
-      <h2 class="gal-title" id="galeri-title">Galeri &amp; Dokumentasi</h2>
+      <div class="sec-head-txt">
+        <h2 class="gal-title" id="galeri-title">Galeri &amp; Dokumentasi</h2>
+        <p class="sec-sub">Potret nyata material yang kami terima — dari besi tua bekas bongkaran hingga scrap tembaga dan aluminium dari lini produksi pabrik.</p>
+      </div>
 
       <div class="gal-tools">
         <div class="gal-hint" aria-hidden="true">
@@ -1093,6 +1112,7 @@
   <div class="wrap">
 
     <h2 class="mat-title" id="mat-title">Jenis Limbah Logam yang Kami Beli</h2>
+    <p class="sec-sub">Kami membeli besi tua, tembaga, aluminium, kuningan, stainless, dan besi cor dalam volume besar, langsung dari pabrik, gudang, dan proyek konstruksi. Setiap material dinilai berdasarkan grade dan kadar logamnya.</p>
 
     <div class="mat-grid">
 
@@ -1221,6 +1241,7 @@
   <div class="wrap">
 
     <h2 class="cara-title" id="cara-title">Cara Menjual Limbah Besi &amp; Logam</h2>
+    <p class="sec-sub">Lima langkah sederhana, dari penawaran sampai pembayaran. Penimbangan dan dokumen dilakukan terbuka, disaksikan langsung oleh penjual.</p>
 
     <ol class="cara-list">
 
@@ -1288,6 +1309,7 @@
 <section id="kontak" class="kontak" aria-labelledby="kontak-title">
   <div class="wrap">
     <h2 class="kontak-title" id="kontak-title">Kontak &amp; Lokasi</h2>
+    <p class="sec-sub">Tim kami siap membantu penawaran harga, jadwal penjemputan, dan informasi jenis material. Kirim pesan lewat WhatsApp atau email untuk respons lebih cepat.</p>
   </div>
 
   <div class="kontak-fade" aria-hidden="true"></div>
