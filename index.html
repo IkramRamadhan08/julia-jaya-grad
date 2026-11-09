@@ -785,7 +785,7 @@
       0 10px 22px -6px rgba(9,32,20,.42),
       0 20px 44px -16px rgba(37,211,102,.72);
     transition:transform .24s cubic-bezier(.34,1.56,.64,1),box-shadow .24s ease;
-    animation:wa-breathe 4s cubic-bezier(.45,0,.25,1) infinite;
+    animation:wa-breathe 2.5s cubic-bezier(.45,0,.25,1) infinite;
     will-change:scale;
   }
   @media(min-width:768px){
@@ -803,7 +803,7 @@
   .wa-float:hover::after{border-color:rgba(37,211,102,.8)}
   .wa-float:hover{
     animation:none;
-    transform:translateY(-3px) scale(1.12);
+    transform:translateY(-3px) scale(1.18);
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,.42),
       inset 0 0 0 1px rgba(15,80,40,.18),
@@ -818,9 +818,9 @@
 
   @keyframes wa-breathe{
     0%, 6%{scale:1}
-    12%{scale:1.1}
+    12%{scale:1.16}
     20%{scale:1}
-    28%{scale:1.07}
+    28%{scale:1.12}
     38%, 100%{scale:1}
   }
 
